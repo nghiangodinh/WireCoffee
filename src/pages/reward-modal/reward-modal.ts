@@ -16,7 +16,7 @@ export class RewardModalPage {
   }
 
   onClose() {
-    //this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss();
   }
 
 }

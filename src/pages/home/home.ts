@@ -1,10 +1,17 @@
 import { UserServiceProvider } from "./../../providers/user-service/user-service";
 import { Component, OnInit } from "@angular/core";
 import { NavController } from "ionic-angular";
-import { LoginPage, AccountPage } from "../pages";
+import {
+  AboutPage,
+  AccountPage,
+  LocationsPage,
+  LoginPage
+} from "../pages";
 
 import { AngularFireAuth } from "angularfire2/auth";
 import * as firebase from "firebase/app";
+//import { FCM } from "@ionic-native/fcm";
+
 
 @Component({
   selector: "page-home",
@@ -18,11 +25,11 @@ export class HomePage implements OnInit {
       pic: "assets/img/coffee-people3.jpg",
       pushPage: AccountPage
     },
-    { title: "About Us", pic: "assets/img/coffee6.jpg", pushPage: "AboutPage" },
+    { title: "About Us", pic: "assets/img/coffee6.jpg", pushPage: AboutPage },
     {
       title: "Locations",
       pic: "assets/img/cafe2.jpg",
-      pushPage: "LocationsPage"
+      pushPage: LocationsPage
     }
   ];
 
@@ -32,7 +39,8 @@ export class HomePage implements OnInit {
   constructor(
     public navCtrl: NavController,
     private afAuth: AngularFireAuth,
-    private userService: UserServiceProvider
+    private userService: UserServiceProvider//,
+    //private fcm: FCM
   ) {}
 
   ngOnInit() {
@@ -41,6 +49,8 @@ export class HomePage implements OnInit {
         this.loggedIn = this.userService.user = user.email;
       }
     });
+
+    //this.initFcm();
   }
 
   signOff() {
@@ -57,5 +67,19 @@ export class HomePage implements OnInit {
         );
       }
     });
+  }
+
+  initFcm() {
+    // this.fcm.onNotification().subscribe(data => {
+    //   if (data.wasTapped) {
+    //     //Notification was received on device tray and tapped by the user.
+    //     console.log(data);
+    //     this.userService.displayAlert(data.title, data.content);
+    //   } else {
+    //     //Notification was received in foreground. Maybe the user needs to be notified.
+    //     console.log(data);
+    //     this.userService.displayAlert(data.title, data.content);
+    //   }
+    // });
   }
 }

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "289651362413",
+    "firebase_url": "https://wirecoffee-e0f3e.firebaseio.com",
+    "project_id": "wirecoffee-e0f3e",
+    "storage_bucket": "wirecoffee-e0f3e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289651362413:android:353dc0d8b9da86e1",
+        "android_client_info": {
+          "package_name": "com.codeschool.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289651362413-7746lccagteb6s546lc9a8f29p7jkj8b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZmQ-Pyu9iapAFcYykVtSb-bwr1GLfJRk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
