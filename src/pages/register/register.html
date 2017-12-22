@@ -7,24 +7,25 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onRegister(f)">
+    <ion-item>
+      <ion-label color="danger">Email Address</ion-label>
+      <ion-input type="email" name="email" ngModel required></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label color="danger">Email Address</ion-label>
-    <ion-input type="email" name="email" [(ngModel)]="reg.email"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label color="danger">Password</ion-label>
+      <ion-input type="password" name="password1" ngModel required></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label color="danger">Password</ion-label>
-    <ion-input type="password" name="password1" [(ngModel)]="reg.password1"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label color="danger">Confirm Password</ion-label>
-    <ion-input type="password" name="password2" [(ngModel)]="reg.password2"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label color="danger">Confirm Password</ion-label>
+      <ion-input type="password" name="password2" ngModel required></ion-input>
+    </ion-item>
 
 
-  <p>Register an account uing a valid email address</p>
-  <button ion-button full color="danger" (click)="registerAccount()">Register</button>
+    <p>Register an account uing a valid email address</p>
+    <button ion-button block color="danger" [disabled]="!f.valid" type="submit">Register</button>
+  </form>
 </ion-content>

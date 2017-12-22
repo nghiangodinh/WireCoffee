@@ -1,3 +1,4 @@
+import { UserServiceProvider } from './../../providers/user-service/user-service';
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { LoginPage } from "../pages";
@@ -31,11 +32,17 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    private afAuth: AngularFireAuth) {
+    private afAuth: AngularFireAuth,
+    private userService: UserServiceProvider) {
       this.afAuth.auth.onAuthStateChanged(user => {
         if (user) {
           this.loggedIn = user.email
         }
       });
+  }
+
+  signOff() {
+    this.userService.logout();
+    this.loggedIn = "";
   }
 }

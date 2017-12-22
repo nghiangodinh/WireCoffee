@@ -1,32 +1,29 @@
+import { UserServiceProvider } from "./../../providers/user-service/user-service";
 import { Component } from "@angular/core";
-import { NavController, NavParams, AlertController } from "ionic-angular";
+import {
+  NavController,
+  AlertController,
+  LoadingController
+} from "ionic-angular";
 
 import { HomePage } from "../pages";
 
 import { AngularFireAuth } from "angularfire2/auth";
 import * as firebase from "firebase/app";
+import { NgForm } from "@angular/forms/src/directives/ng_form";
 
 @Component({
   selector: "page-register",
   templateUrl: "register.html"
 })
 export class RegisterPage {
-  reg = {
-    email: "",
-    password1: "",
-    password2: ""
-  };
-
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
     private alertCtrl: AlertController,
-    private afAuth: AngularFireAuth
+    private loadingCtrl: LoadingController,
+    private afAuth: AngularFireAuth,
+    private userService: UserServiceProvider
   ) {}
-
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad RegisterPage");
-  }
 
   displayAlert(alertTitle, alertSub) {
     const alert = this.alertCtrl.create({
@@ -37,27 +34,39 @@ export class RegisterPage {
     alert.present();
   }
 
-  registerAccount() {
-    if (this.reg.password1 !== this.reg.password2) {
+  onRegister(form: NgForm) {
+    if (form.value.password1 !== form.value.password2) {
       this.displayAlert(
         "Password problem!",
         "Passwords do not match, please try again!"
       );
-      this.reg.password1 = "";
-      this.reg.password2 = "";
+      form.reset({
+        email: form.value.email,
+        password1: "",
+        password2: ""
+      });
     } else {
+      const loading = this.loadingCtrl.create({
+        content: "Creating your account..."
+      });
+      loading.present();
+
       this.afAuth.auth
-        .createUserWithEmailAndPassword(this.reg.email, this.reg.password1)
-        .then(data => this.regSuccess(data))
-        .catch(err => this.displayAlert("Error!", err));
+        .createUserWithEmailAndPassword(form.value.email, form.value.password1)
+        .then(data => {
+          loading.dismiss();
+          this.regSuccess(form);
+        })
+        .catch(err => {
+          loading.dismiss();
+          this.displayAlert("Error!", err);
+        });
     }
   }
 
-  regSuccess(result: any) {
-    this.displayAlert(result.email, "Account created for this email address");
-    this.afAuth.auth
-      .signInWithEmailAndPassword(this.reg.email, this.reg.password1)
-      .then(data => this.navCtrl.push(HomePage))
-      .catch(err => this.displayAlert("Error!", err));
+  regSuccess(form: NgForm) {
+    this.userService
+      .logOn(form.value.email, form.value.password1)
+      .then(data => this.navCtrl.push(HomePage));
   }
 }

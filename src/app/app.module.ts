@@ -10,6 +10,7 @@ import {
   AngularFireDatabase
 } from "angularfire2/database";
 import { AngularFireAuthModule } from "angularfire2/auth";
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from "./app.component";
 import {
@@ -17,6 +18,7 @@ import {
   LoginPage,
   RegisterPage
 } from "../pages/pages";
+import { UserServiceProvider } from '../providers/user-service/user-service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCuMTJOkLADDkJoiCP9aainHhyza4DUBro",
@@ -39,7 +41,8 @@ export const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,7 +55,8 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    UserServiceProvider
   ]
 })
 export class AppModule {}

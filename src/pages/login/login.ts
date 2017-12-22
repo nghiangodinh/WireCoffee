@@ -1,6 +1,10 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
-import { RegisterPage } from "../pages";
+import { NavController, LoadingController } from "ionic-angular";
+import { NgForm } from "@angular/forms";
+
+import { RegisterPage, HomePage } from "../pages";
+import { UserServiceProvider } from "../../providers/user-service/user-service";
+
 
 @Component({
   selector: "page-login",
@@ -9,9 +13,28 @@ import { RegisterPage } from "../pages";
 export class LoginPage {
   regPage = RegisterPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(
+    public navCtrl: NavController,
+    private userService: UserServiceProvider,
+    private loadingCtrl: LoadingController
+  ) {}
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad LoginPage");
+  onSubmit(form: NgForm) {
+    const loading = this.loadingCtrl.create({
+      content: "Signing in...",
+    });
+    loading.present();
+
+    this.userService
+      .logOn(form.value.email, form.value.password)
+      .then(returned => {
+        loading.dismiss();
+
+        if (this.userService.success) {
+          this.navCtrl.push(HomePage);
+        } else {
+          form.reset();
+        }
+      });
   }
 }
