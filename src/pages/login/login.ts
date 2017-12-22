@@ -3,7 +3,7 @@ import { NavController, LoadingController } from "ionic-angular";
 import { NgForm } from "@angular/forms";
 
 import { RegisterPage, HomePage } from "../pages";
-import { UserServiceProvider } from "../../providers/user-service/user-service";
+import { UserServiceProvider } from "../../providers/providers";
 
 
 @Component({
@@ -15,8 +15,8 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController,
-    private userService: UserServiceProvider,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private userService: UserServiceProvider
   ) {}
 
   onSubmit(form: NgForm) {

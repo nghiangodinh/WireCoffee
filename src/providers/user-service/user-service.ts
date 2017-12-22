@@ -1,22 +1,26 @@
-import * as firebase from 'firebase/app';
-import { AlertController } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
-
-
+import * as firebase from "firebase/app";
+import { AlertController } from "ionic-angular";
+import { AngularFireAuth } from "angularfire2/auth";
+import {
+  AngularFireDatabase,
+  FirebaseListObservable
+} from "angularfire2/database";
+import { Injectable } from "@angular/core";
+import { Storage } from "@ionic/storage";
+import { RewardServiceProvider } from "../providers";
 
 @Injectable()
 export class UserServiceProvider {
   items: FirebaseListObservable<any>;
-  success: boolean;
+  success: boolean = false;
+  user: any
 
   constructor(
     private alertCtrl: AlertController,
     private afAuth: AngularFireAuth,
     private storage: Storage,
-    private afDb: AngularFireDatabase
+    private afDb: AngularFireDatabase,
+    private rewardService: RewardServiceProvider
   ) {
     this.items = this.afDb.list("/users");
   }
@@ -26,6 +30,7 @@ export class UserServiceProvider {
       .signOut()
       .then(loggedOut => {
         this.displayAlert("Logged out", "Come back and visit soon!");
+        this.success = false;
       })
       .catch(err => this.displayAlert("Error!", err));
   }
@@ -84,7 +89,7 @@ export class UserServiceProvider {
   updateUser(theUser, theUserData) {
     const newData = {
       creation: theUserData.creation,
-      logins: theUserData.logins + 1,
+      logins: theUserData.logins,
       rewardCount: theUserData.rewardCount,
       lastLogin: new Date().toLocaleString(),
       id: theUserData.id
@@ -109,9 +114,13 @@ export class UserServiceProvider {
               this.displayAlert(user, "New account saved for this user");
             });
           } else {
-            this.updateUser(user, returned).then(updated =>
-              console.log(user, updated)
-            );
+            this.rewardService
+              .rewardsCheck(user, returned)
+              .then(rewardResult => {
+                this.updateUser(user, rewardResult).then(updated =>
+                  console.log(user, updated)
+                );
+              });
           }
         });
 

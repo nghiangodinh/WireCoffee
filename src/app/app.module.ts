@@ -14,11 +14,17 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from "./app.component";
 import {
+  AccountPage,
   HomePage,
   LoginPage,
-  RegisterPage
+  RegisterPage,
+  RewardModalPage
 } from "../pages/pages";
-import { UserServiceProvider } from '../providers/user-service/user-service';
+
+import {
+  RewardServiceProvider,
+  UserServiceProvider
+} from "../providers/providers"
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCuMTJOkLADDkJoiCP9aainHhyza4DUBro",
@@ -32,9 +38,11 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
+    AccountPage,
     HomePage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    RewardModalPage
   ],
   imports: [
     BrowserModule,
@@ -47,15 +55,18 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    AccountPage,
     HomePage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    RewardModalPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    RewardServiceProvider,
     UserServiceProvider
   ]
 })

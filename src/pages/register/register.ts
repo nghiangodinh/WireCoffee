@@ -1,4 +1,3 @@
-import { UserServiceProvider } from "./../../providers/user-service/user-service";
 import { Component } from "@angular/core";
 import {
   NavController,
@@ -11,6 +10,7 @@ import { HomePage } from "../pages";
 import { AngularFireAuth } from "angularfire2/auth";
 import * as firebase from "firebase/app";
 import { NgForm } from "@angular/forms/src/directives/ng_form";
+import { UserServiceProvider } from "../../providers/providers"
 
 @Component({
   selector: "page-register",
