@@ -1,30 +1,58 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
+import { BrowserModule } from "@angular/platform-browser";
+import { ErrorHandler, NgModule } from "@angular/core";
+import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
+import { SplashScreen } from "@ionic-native/splash-screen";
+import { StatusBar } from "@ionic-native/status-bar";
 
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { AngularFireModule } from "angularfire2";
+import {
+  AngularFireDatabaseModule,
+  AngularFireDatabase
+} from "angularfire2/database";
+import { AngularFireAuthModule } from "angularfire2/auth";
+
+import { MyApp } from "./app.component";
+import {
+  HomePage,
+  LoginPage,
+  RegisterPage
+} from "../pages/pages";
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyCuMTJOkLADDkJoiCP9aainHhyza4DUBro",
+  authDomain: "wirecoffee-e0f3e.firebaseapp.com",
+  databaseURL: "https://wirecoffee-e0f3e.firebaseio.com",
+  projectId: "wirecoffee-e0f3e",
+  storageBucket: "wirecoffee-e0f3e.appspot.com",
+  messagingSenderId: "289651362413"
+};
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    AngularFireDatabase,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
 export class AppModule {}

@@ -1,5 +1,10 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
+import { LoginPage } from "../pages";
+
+import { AngularFireAuth } from "angularfire2/auth";
+import * as firebase from "firebase/app";
+
 
 @Component({
   selector: "page-home",
@@ -21,5 +26,16 @@ export class HomePage {
     }
   ];
 
-  constructor(public navCtrl: NavController) {}
+  logPage = LoginPage
+  loggedIn: any;
+
+  constructor(
+    public navCtrl: NavController,
+    private afAuth: AngularFireAuth) {
+      this.afAuth.auth.onAuthStateChanged(user => {
+        if (user) {
+          this.loggedIn = user.email
+        }
+      });
+  }
 }
