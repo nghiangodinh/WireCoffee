@@ -20,6 +20,7 @@ import {
   HomePage,
   LocationsPage,
   LoginPage,
+  MenuPage,
   RegisterPage,
   RewardModalPage
 } from "../pages/pages";
@@ -28,6 +29,7 @@ import {
   RewardServiceProvider,
   UserServiceProvider
 } from "../providers/providers"
+import { MenuServiceProvider } from '../providers/menu-service/menu-service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCuMTJOkLADDkJoiCP9aainHhyza4DUBro",
@@ -46,6 +48,7 @@ export const firebaseConfig = {
     HomePage,
     LocationsPage,
     LoginPage,
+    MenuPage,
     RegisterPage,
     RewardModalPage
   ],
@@ -65,6 +68,7 @@ export const firebaseConfig = {
     HomePage,
     LocationsPage,
     LoginPage,
+    MenuPage,
     RegisterPage,
     RewardModalPage
   ],
@@ -75,7 +79,8 @@ export const firebaseConfig = {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     RewardServiceProvider,
     UserServiceProvider,
-    FCM
+    FCM,
+    MenuServiceProvider
   ]
 })
 export class AppModule {}

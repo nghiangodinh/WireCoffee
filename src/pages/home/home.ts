@@ -4,6 +4,7 @@ import { NavController } from "ionic-angular";
 import {
   AboutPage,
   AccountPage,
+  MenuPage,
   LocationsPage,
   LoginPage
 } from "../pages";
@@ -19,7 +20,7 @@ import * as firebase from "firebase/app";
 })
 export class HomePage implements OnInit {
   menuData = [
-    { title: "Our Menu", pic: "assets/img/soup1.jpg", pushPage: "MenuPage" },
+    { title: "Our Menu", pic: "assets/img/soup1.jpg", pushPage: MenuPage },
     {
       title: "Account",
       pic: "assets/img/coffee-people3.jpg",
