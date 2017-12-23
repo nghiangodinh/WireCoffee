@@ -1,6 +1,7 @@
 import { MenuServiceProvider } from '../../providers/providers';
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { MenuDetailPage } from '../pages';
 
 
 @IonicPage()
@@ -9,6 +10,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'menu.html',
 })
 export class MenuPage implements OnInit {
+  menuDetailPage = MenuDetailPage
 
   myCoffee:any[] = [];
 
@@ -33,7 +35,9 @@ export class MenuPage implements OnInit {
   }
 
   chooseCafe(id) {
-    console.log(id);
+    this.navCtrl.push(this.menuDetailPage, {
+      id: id
+    });
   }
 
 }

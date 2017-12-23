@@ -38,10 +38,11 @@ export class MenuServiceProvider {
     return Promise.resolve(this.cafe);
   }
 
-  getOne(search){
-    let tmp = this.cafe.map(x => x.id).indexOf(search);
-    let single = this.cafe[tmp];
+  getOne(search: string) {
+    // let tmp = this.cafe.map(x => x.id).indexOf(search);
+    // let single = this.cafe[tmp];
 
+    const single = this.cafe.find(item => item.id === search)
     return Promise.resolve(single);
   }
 }

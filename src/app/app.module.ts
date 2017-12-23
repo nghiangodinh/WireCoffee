@@ -20,6 +20,7 @@ import {
   HomePage,
   LocationsPage,
   LoginPage,
+  MenuDetailPage,
   MenuPage,
   RegisterPage,
   RewardModalPage
@@ -48,6 +49,7 @@ export const firebaseConfig = {
     HomePage,
     LocationsPage,
     LoginPage,
+    MenuDetailPage,
     MenuPage,
     RegisterPage,
     RewardModalPage
@@ -68,6 +70,7 @@ export const firebaseConfig = {
     HomePage,
     LocationsPage,
     LoginPage,
+    MenuDetailPage,
     MenuPage,
     RegisterPage,
     RewardModalPage

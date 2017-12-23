@@ -6,4 +6,5 @@ export * from "./account/account"
 export * from "./about/about"
 export * from "./locations/locations"
 export * from "./menu/menu"
+export * from "./menu-detail/menu-detail"
 
