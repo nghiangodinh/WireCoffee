@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
-import { MenuServiceProvider } from "../../providers/menu-service/menu-service";
+import {
+  CartServiceProvider,
+  MenuServiceProvider,
+  UserServiceProvider
+} from "../../providers/providers";
 
 @IonicPage()
 @Component({
@@ -18,17 +22,18 @@ export class MenuDetailPage implements OnInit {
     large: 0,
     size: "",
     price: 0,
-    milk: "no" //,
-    // whip: "no",
-    // orderId: ""
+    milk: "no",
+    orderId: "",
+    whip: "no"
   };
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public menuList: MenuServiceProvider
-  ) /*public cartSvc: CartServiceProvider, public userService: UserServiceProvider*/ {
-  }
+    public menuList: MenuServiceProvider,
+    public cartSvc: CartServiceProvider,
+    public userService: UserServiceProvider
+  ) {}
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad MenuDetailPage");
@@ -51,36 +56,26 @@ export class MenuDetailPage implements OnInit {
   }
 
   addToCart() {
-    if (this.theCoffee.price == this.theCoffee.small) {
-      this.theCoffee.size = "small";
-    } else if (this.theCoffee.price == this.theCoffee.medium) {
-      this.theCoffee.size = "medium";
+    if (this.userService.success) {
+      if (this.theCoffee.price == this.theCoffee.small) {
+        this.theCoffee.size = "small";
+      } else if (this.theCoffee.price == this.theCoffee.medium) {
+        this.theCoffee.size = "medium";
+      } else {
+        this.theCoffee.size = "large";
+      }
+      this.theCoffee.price = Number(this.theCoffee.price);
+      this.theCoffee.orderId = `${this.theCoffee.id}-${this.theCoffee.price}`;
+      this.cartSvc.addItem(this.theCoffee);
+      this.userService.displayAlert(
+        `${this.theCoffee.size} ${this.theCoffee.name}`,
+        "Added to cart"
+      );
     } else {
-      this.theCoffee.size = "large";
+      this.userService.displayAlert(
+        "Cannot Add",
+        "You need to register an account first"
+      );
     }
   }
-
-  // addToCart() {
-  //   if (this.userService.success) {
-  //     if (this.theCoffee.price == this.theCoffee.small) {
-  //       this.theCoffee.size = "small";
-  //     } else if (this.theCoffee.price == this.theCoffee.medium) {
-  //       this.theCoffee.size = "medium";
-  //     } else {
-  //       this.theCoffee.size = "large";
-  //     }
-  //     this.theCoffee.price = Number(this.theCoffee.price);
-  //     this.theCoffee.orderId = `${this.theCoffee.id}-${this.theCoffee.price}`;
-  //     this.cartSvc.addItem(this.theCoffee);
-  //     this.userService.displayAlert(
-  //       `${this.theCoffee.size} ${this.theCoffee.name}`,
-  //       "Added to cart"
-  //     );
-  //   } else {
-  //     this.userService.displayAlert(
-  //       "Cannot Add",
-  //       "You need to register an account first"
-  //     );
-  //   }
-  // }
 }

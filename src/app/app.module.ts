@@ -17,6 +17,7 @@ import { MyApp } from "./app.component";
 import {
   AboutPage,
   AccountPage,
+  CheckoutPage,
   HomePage,
   LocationsPage,
   LoginPage,
@@ -27,6 +28,7 @@ import {
 } from "../pages/pages";
 
 import {
+  CartServiceProvider,
   RewardServiceProvider,
   UserServiceProvider
 } from "../providers/providers"
@@ -46,6 +48,7 @@ export const firebaseConfig = {
     MyApp,
     AboutPage,
     AccountPage,
+    CheckoutPage,
     HomePage,
     LocationsPage,
     LoginPage,
@@ -67,6 +70,7 @@ export const firebaseConfig = {
     MyApp,
     AboutPage,
     AccountPage,
+    CheckoutPage,
     HomePage,
     LocationsPage,
     LoginPage,
@@ -80,6 +84,7 @@ export const firebaseConfig = {
     SplashScreen,
     AngularFireDatabase,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    CartServiceProvider,
     RewardServiceProvider,
     UserServiceProvider,
     FCM,

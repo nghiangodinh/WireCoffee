@@ -4,6 +4,7 @@ import { NavController } from "ionic-angular";
 import {
   AboutPage,
   AccountPage,
+  CheckoutPage,
   MenuPage,
   LocationsPage,
   LoginPage
@@ -35,6 +36,7 @@ export class HomePage implements OnInit {
   ];
 
   logPage = LoginPage;
+  checkoutPage = CheckoutPage
   loggedIn: any;
 
   constructor(
