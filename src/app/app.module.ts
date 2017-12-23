@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 import { FCM } from '@ionic-native/fcm';
+import { PayPal } from '@ionic-native/paypal';
 
 import { AngularFireModule } from "angularfire2";
 import {
@@ -88,6 +89,7 @@ export const firebaseConfig = {
     RewardServiceProvider,
     UserServiceProvider,
     FCM,
+    PayPal,
     MenuServiceProvider
   ]
 })
