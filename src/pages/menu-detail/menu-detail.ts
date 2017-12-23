@@ -1,12 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams } from "ionic-angular";
 import {
   CartServiceProvider,
   MenuServiceProvider,
   UserServiceProvider
 } from "../../providers/providers";
 
-@IonicPage()
 @Component({
   selector: "page-menu-detail",
   templateUrl: "menu-detail.html"
